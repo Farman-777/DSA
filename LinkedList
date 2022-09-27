@@ -1,4 +1,4 @@
-//Nth Element in linked list
+//Nth Element in the list
 #include <iostream>
 using namespace std;
 
@@ -16,9 +16,6 @@ void createLL(node **head,int x){
     n->data=x;
     n->next=(*head);
     (*head)=n;
-    // cout<<"node inserted\n";
-// tempNode=(*head);
-    
 }
 
 
@@ -32,23 +29,7 @@ void displayLL(node *head)
         
     }
 }
-node *reverseLL(node *head_ref)
-{
-    node *curr,*nxt;
-   node *prev=NULL;
-    curr=head_ref;nxt=NULL;
-    while(curr!=NULL)
-    {
-        nxt=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=nxt;
-    }
-    
-    (head_ref)=prev;
-    return (head_ref);
 
-} 
 
 int GetNth(node *head_ref,int n)
 {
@@ -69,8 +50,6 @@ int main()
     createLL(&head,30);
     createLL(&head,40);
     displayLL(head);
-    // node *temp=reverseLL(head);cout<<endl;
-    // displayLL(temp);
-    cout<<"element in 3rd number : "<<GetNth(head,2);
+    cout<<"\nelement in 3rd number : "<<GetNth(head,2);
    getchar();
 }
