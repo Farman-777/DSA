@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+};
+
+node *front=NULL;
+node *rear=NULL;
+
+void enqueue(int x){
+    node *n = new node;
+    n->data=x;
+    n->next=NULL;
+    if(front==NULL && rear==NULL){ front=rear=n; }
+    else{ rear->next=n; rear=n; }
+    cout<<"enqueued element is : "<<x;
+}
+void dequeue(){
+    if(front==NULL && rear==NULL){ cout<<"queue is empty...\n"; }
+    node *temp=front;
+    front=front->next;
+    cout<<"dequeued element is : "<<temp->data;
+    delete temp;
+}
+void display(){
+    node *temp=front;
+    cout<<"queue : ";
+    while(temp!=NULL){ cout<<temp->data<<" "; temp=temp->next; }
+}
+
+void peak(){
+    if(front==NULL && rear==NULL){ cout<<"queue is empty...\n"; }
+    else{ cout<<"peak element in the queue is : "<<front->data; }
+}
+int main()
+{
+    enqueue(10);cout<<endl;display();cout<<endl;cout<<endl;
+    enqueue(20);cout<<endl;display();cout<<endl;cout<<endl;
+    enqueue(30);cout<<endl;display();cout<<endl;cout<<endl;
+    enqueue(40);cout<<endl;display();cout<<endl;cout<<endl;
+    enqueue(50);cout<<endl;display();cout<<endl;cout<<endl;
+    enqueue(60);cout<<endl;display();cout<<endl;cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;cout<<endl;
+    peak();cout<<endl;display();cout<<endl;cout<<endl;
+    
+    return 0;
+}

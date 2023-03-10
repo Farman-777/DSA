@@ -1,0 +1,111 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+struct node {
+    int data;
+    node *next;
+};
+
+node *head=NULL;
+
+void insertAtfirstSLL(int x){
+node *n = new node;
+n->data=x;
+n->next=head;
+head=n;
+cout<<"Node inserted at first : "<<x<<endl;
+
+}
+void insertAtlast(int x){
+    cout<<"\nnode inserted at last : "<<x<<endl;
+    node *temp=head;
+    node *n = new node;
+    n->data=x;
+    n->next=NULL;
+    while(temp->next!=NULL){ temp=temp->next; }
+    temp->next=n;
+    
+}
+
+void insertAtpos(int x){
+    int pos,i=1; node *n = new node;
+    node *temp=head;
+    cout<<"\nEnter pos where you want to insert ("<<x<<") node : ";
+    cin>>pos;
+    
+    while(i<pos-1){ temp=temp->next; i++; }
+    n->data=x;
+    n->next=temp->next;
+    temp->next=n;
+}
+
+void showSLL(){
+    cout<<"linked list :\n";
+    node *temp=head;
+    while(temp!=NULL){ cout<<temp->data<<" "; temp=temp->next; }
+}
+
+void deleteAtfirst(){
+    node *temp=head;
+    head=head->next;
+    cout<<"first node "<<temp->data<<" deleted..";
+    delete temp;
+}
+
+void deleteAtlast(){
+    node *t1=head,*t2=NULL;
+    while(t1->next!=NULL){ t2=t1; t1=t1->next; }
+    t2->next=NULL;
+    cout<<"last node "<<t1->data<<" deleted..";
+    delete t1;
+    
+}
+
+void deleteAtpos(){
+    int pos,i=1;
+    node *temp=head; node *t1;
+    cout<<"\nEnter pos at which you want to delete  : ";
+    cin>>pos;
+    
+    while(i<pos-1){ temp=temp->next; i++; }
+    t1=temp->next; temp->next=t1->next;
+    cout<<"\nnode "<<t1->data<<" deleted..";
+    delete t1;
+}
+void reverseSLL(){
+    cout<<"\nReverse ";
+    node *prev,*curr,*Next;
+    prev=NULL; curr=Next=head;
+    
+        while(curr!=NULL){
+        Next=Next->next;
+        curr->next=prev;
+        prev=curr;
+        curr=Next;
+    }
+    head=prev;
+}
+int main()
+{
+   insertAtfirstSLL(10);
+   insertAtfirstSLL(20);
+   insertAtfirstSLL(30);
+   insertAtfirstSLL(40);cout<<endl;
+   showSLL();cout<<"\n";
+   
+   insertAtlast(60);
+   showSLL();cout<<"\n";cout<<endl;
+   
+   insertAtpos(70);
+   showSLL();cout<<"\n";cout<<endl;
+   
+   deleteAtfirst();cout<<endl; cout<<endl;showSLL();cout<<"\n\n";
+   
+   deleteAtlast();cout<<endl; cout<<endl;showSLL();cout<<"\n\n";
+   
+   showSLL();cout<<"\n";deleteAtpos();cout<<endl; cout<<endl;showSLL();cout<<"\n\n";
+   
+   reverseSLL();
+   showSLL();cout<<"\n";
+    return 0;
+}

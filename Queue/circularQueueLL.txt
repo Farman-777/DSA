@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+struct node{
+    int data;
+    node *next;
+};
+
+node *front=NULL;
+node *rear=NULL;
+
+void enqueue(int x){
+    node *n = new node;
+    n->data=x;
+    n->next=n;
+    if(front==NULL && rear==NULL){ front=rear=n; }
+    else {
+    rear->next=n;
+    rear = n;
+    rear->next=front; }
+}
+void dequeue(){
+    if(front==NULL && rear==NULL){ cout<<"queue is empty...\n"; }
+    else if(front==rear){ front=NULL;rear=NULL; }
+    else{
+    node *temp=front;
+    front=front->next;
+    rear->next=front;
+    delete temp; }
+
+}
+
+void display(){
+    
+    if(front==NULL && rear==NULL){ cout<<"queue is empty...\n"; }
+    node *temp=front;
+    while(temp->next!=front){ cout<<temp->data<<" "; temp=temp->next; }
+    cout<<temp->data<<endl;
+}
+
+int main()
+{
+
+enqueue(10);cout<<endl;display();cout<<endl;
+enqueue(20);cout<<endl;display();cout<<endl;
+enqueue(30);cout<<endl;display();cout<<endl;
+enqueue(40);cout<<endl;display();cout<<endl;
+enqueue(50);cout<<endl;display();cout<<endl;
+dequeue();cout<<endl;display();cout<<endl;
+dequeue();cout<<endl;display();cout<<endl;
+
+
+return 0;
+}

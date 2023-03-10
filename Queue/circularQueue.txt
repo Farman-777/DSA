@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+#define N 5
+int queue[N];
+int front=-1;
+int rear=-1;
+
+
+void enqueue(int x){
+    if(front==-1 && rear==-1){ 
+    front=rear=0; 
+    queue[rear]=x; 
+    cout<<"Inserted element is : "<<x;}
+    else if((rear+1)%N==front){ cout<<"queue is full\n"; }
+    else{ rear=(rear+1)%N; queue[rear]=x;
+    cout<<"Inserted element is : "<<x; }
+}
+
+void dequeue(){
+        if(front==-1 && rear==-1){ cout<<"queue is empty\n"; }
+        else if(front==rear){ front=rear=-1; }
+        else{ cout<<"dequeued element is : "<<queue[front];front=(front+1)%N; }
+}
+
+void display(){ 
+        if(front==-1 && rear==-1){ cout<<"queue is empty\n"; }
+        else{ 
+            int i=front;
+            while(i!=rear){
+                cout<<queue[i]<<" ";
+                i=(i+1)%N;
+            }
+            cout<<queue[i]<<endl;
+        }
+        }
+void peak(){
+    if(front==-1 && rear==-1){ cout<<"Queue is empty...\n"; }
+    else{ cout<<"Peak element is : "<<queue[front]; }
+}
+int main()
+{
+    enqueue(10);cout<<endl;display();cout<<endl;
+    enqueue(20);cout<<endl;display();cout<<endl;
+    enqueue(80);cout<<endl;display();cout<<endl;
+    enqueue(40);cout<<endl;display();cout<<endl;
+    enqueue(50);cout<<endl;display();cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;cout<<endl;
+    enqueue(50);cout<<endl;display();cout<<endl;cout<<endl;
+    peak();cout<<endl;
+    enqueue(10);cout<<endl;display();cout<<endl;
+
+
+    return 0;
+}

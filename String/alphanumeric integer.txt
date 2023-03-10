@@ -1,0 +1,23 @@
+//Integer of alphanumeric string sum program
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string str="farman786";
+    int i,sum=0;
+    char a;
+    int n=str.length();
+    for(i=0;i<n;i++)
+    {
+        if(str[i]>47 && str[i]<58)
+        {
+           a=str[i];
+           sum+=stoi(&a);
+        }
+    }
+    cout<<"Hello World sum is : "<<sum;
+
+    return 0;
+}

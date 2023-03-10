@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+#define N 5
+int queue[N];
+int front=-1;
+int rear=-1;
+
+void enqueueFront(int x){
+    if(front==0 && rear==N-1 || front==rear+1 ){ cout<<"queue is full\n"; }
+    else if(front==-1 && rear==-1){ front=rear=0; queue[front]=x;}
+    else if(front==0){ front=N-1; queue[front]=x;}
+    else { front--;  queue[front]=x; }
+}
+
+void enqueueRear(int x){
+    if(front==0 && rear==N-1 || front==rear+1 ){ cout<<"queue is full\n"; }
+    else if(front==-1 && rear==-1){ front=rear=0; queue[rear]=x; }
+    else if(rear==N-1){ rear=0; queue[rear]=x; }
+    else{ rear++; queue[rear]=x; }
+}
+
+void display(){
+    int i=front;
+    cout<<"Queue is : ";
+    while(i!=rear){ cout<<queue[i]<<" "; i=(i+1)%N; }
+    cout<<queue[i];
+}
+
+void dequeueFront(){
+    if(front==-1 && rear==-1){ cout<<"Queue is emepty...\n"; }
+    else if(front==rear){ front=rear=-1; }
+    else if(front==N-1){ cout<<"dequeued from front : "<<queue[front]; front=0; }
+    else{ cout<<"dequeued from front : "<<queue[front]; front++; }
+    
+}
+
+void dequeueRear(){
+    if(front==-1 && rear==-1){ cout<<"Queue is emepty...\n"; }
+    else if(front==rear){ front=rear=-1; }
+    else if(rear==0){ cout<<"dequeued from rear : "<<queue[rear]; rear=N-1; }
+    else { cout<<"dequeued from rear : "<<queue[rear]; rear--; }
+}
+    
+
+int main()
+{
+    enqueueFront(10);cout<<endl;display();cout<<endl;
+    enqueueFront(20);cout<<endl;display();cout<<endl;
+    enqueueFront(30);cout<<endl;display();cout<<endl;
+    enqueueFront(40);cout<<endl;display();cout<<endl;
+    enqueueRear(60);cout<<endl;display();cout<<endl;
+    
+    return 0;
+}

@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+#define N 5
+
+int queue[N];
+int front=-1;
+int rear=-1;
+
+void enqueue(int x){
+    if(rear==N-1){ cout<<"Insertion can not be performed due to Overflow\n"; }
+    else if(front==-1 && rear==-1){ 
+        front=rear=0; queue[rear]=x; 
+        cout<<"Inserted element in queue : "<<x; cout<<endl; 
+        
+    }
+    else { rear++; 
+    queue[rear]=x; cout<<"inserted element in queue : "<<x; cout<<endl; }
+}
+void dequeue(){
+    if(front==-1 && rear==-1){ cout<<"queue is empty\n"; }
+    else if(front==rear){ front=rear=-1; 
+    cout<<"Deleted element in queue : "<<queue[front]; cout<<endl;}
+    else{ 
+    cout<<"Deleted element in queue : "<<queue[front]; cout<<endl; 
+    front++; }
+    
+}
+void display(){
+      if(front==-1 && rear==-1){ cout<<"queue is empty\n"; }
+      else{
+          cout<<"Elements in queue : ";
+          for(int i=front;i<=rear;i++){ cout<<queue[i]<<" "; }
+      }
+}
+
+void peek(){
+    if(front==-1 && rear==-1){ cout<<"queue is empty\n"; }
+      else{ cout<<"Peak Element in queue : "<<queue[front]; }
+}
+
+int main()
+{
+    enqueue(10);cout<<endl;display();cout<<endl;
+    enqueue(20);cout<<endl;display();cout<<endl;
+    enqueue(30);cout<<endl;display();cout<<endl;
+    enqueue(40);cout<<endl;display();cout<<endl;
+    enqueue(50);cout<<endl;display();cout<<endl;
+    enqueue(50);cout<<endl;display();cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;
+    dequeue();cout<<endl;display();cout<<endl;
+    
+    return 0;
+}

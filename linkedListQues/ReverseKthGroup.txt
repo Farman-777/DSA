@@ -1,0 +1,72 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+struct node {
+    int data;
+    node *next;
+};
+
+node *head=NULL;
+
+void insertAtfirstSLL(int x){
+node *n = new node;
+n->data=x;
+n->next=head;
+head=n;
+cout<<"Node inserted at first : "<<x<<endl;
+
+}
+
+void showSLL(node *head){
+    cout<<"linked list : ";
+    node *temp=head;
+    while(temp!=NULL){ cout<<temp->data<<" "; temp=temp->next; }
+}
+
+
+
+//Step 1 : Reversing First K Nodes
+node *Kreverse(node *head, int k){
+    if(head==NULL) { return NULL; } //Base case
+    
+    node *nxt=NULL;
+    node *curr=head;
+    node *prev=NULL;
+    int count=0;
+    
+    while(curr!=NULL && count<k){
+        nxt=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=nxt;
+        count++;
+    }
+    
+//Step 2 : Recursion Process
+
+    if(nxt!=NULL){
+    head->next = Kreverse(nxt,k);
+}
+
+//Step 3 : Return Head of Reversed list
+    return prev;
+
+}
+
+
+int main()
+{
+   insertAtfirstSLL(10);
+   insertAtfirstSLL(20);
+   insertAtfirstSLL(30);
+   insertAtfirstSLL(40);
+   insertAtfirstSLL(50);
+   insertAtfirstSLL(60);cout<<endl;
+   showSLL(head);cout<<"\n";
+    
+   cout<<endl;cout<<"Reversed ";
+   showSLL(Kreverse(head,4));cout<<"\n";
+   
+
+  return 0;
+}

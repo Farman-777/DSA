@@ -1,0 +1,151 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+    node *prev;
+};
+
+node *head=NULL;
+node *tail=NULL;
+
+void createFirstDLL(int x){
+  
+    node *n = new node;
+    n->data = x;
+    n->next=head;
+    n->prev=NULL;
+    
+    if(head==NULL){ tail=n; }
+   else{ head->prev = n; }
+    head=n;
+    cout<<endl;
+    cout<<x<<" : Element inserted\n";
+
+}
+void insertAtLast(int x){
+    node *n = new node;
+    n->data=x;
+    n->next=NULL;
+    n->prev=tail;
+    tail->next=n;
+    tail=n;
+    cout<<endl<<x<<" : Element inserted at last\n";
+  
+}
+void showDLL(){
+    node *temp=head;
+    while(temp!=NULL){ cout<<temp->data<<" "; temp=temp->next; }
+}
+void insertAtpos(int x){
+    int pos,i=1; node *temp=NULL; 
+    showDLL();
+    
+    cout<<"\nEnter Position where Node will be inserted : ";
+    cin>>pos;cout<<endl;
+    
+    temp=head;
+    while(i<pos-1){ temp=temp->next; i++; }
+    
+    node *n = new node;
+    n->data=x;
+    n->next=temp->next;
+    n->prev=temp->next->prev;
+    temp->next->prev=n;
+    temp->next=n;
+    cout<<x<<" : Element inserted at "<<(i+1)<<" position : ";
+
+    
+}
+
+void deleteAtfirstDLL(){
+    node *temp;
+    temp=head;
+    head=head->next;
+    head->prev=NULL;
+    delete temp;
+    cout<<"First Element is deleted...\n";
+
+    
+}
+
+void deleteAtlastDLL(){
+    node *temp;
+    temp=tail;
+    tail=tail->prev;
+    tail->next=NULL;
+    delete temp;
+    cout<<"Last Element is deleted...\n";
+
+    
+}
+
+void deleteAtpos(){
+    int pos,i=1;node *temp=head; node *t1;
+    cout<<"\nEnter a position for deleting node : ";
+    cin>>pos;
+    
+    while(i<pos-1){ temp=temp->next; i++;}
+    t1=temp->next;
+    temp->next->next->prev=temp;
+    temp->next=temp->next->next;
+    cout<<"\nElement ("<<t1->data<<") is deleted at : "<<pos<<" position\n";
+    
+    delete t1;
+    
+}
+    
+
+void reverseDLL(){
+  node *current=head; node *t;
+  node *nextnode;
+  while(current != NULL){
+      nextnode=current->next;
+      current->next=current->prev;
+      current->prev=nextnode;
+      current=nextnode;
+    
+}
+current=head;
+head=tail;
+tail=current;
+
+}
+
+
+int main()
+{
+    
+   
+    createFirstDLL(10);
+    createFirstDLL(20);
+    createFirstDLL(30);
+    createFirstDLL(40);
+    createFirstDLL(50);
+    cout<<endl;
+    cout<<"Entered Doubly Linked List is : ";
+    showDLL();cout<<endl;
+    
+    insertAtLast(5);
+    cout<<"Entered Doubly Linked List after entered last element is : ";
+    showDLL();cout<<endl;
+    
+    cout<<"\nEntered Doubly Linked List is : ";
+    insertAtpos(60);
+    showDLL();cout<<endl;
+    
+    // deleteAtfirstDLL();
+    // showDLL();cout<<endl;
+    
+    // deleteAtlastDLL();
+    // showDLL();
+
+    deleteAtpos();
+    showDLL();cout<<endl;
+    
+    reverseDLL();cout<<"\nReversed ";showDLL();
+
+    return 0;
+}

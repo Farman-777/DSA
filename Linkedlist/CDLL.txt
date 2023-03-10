@@ -1,0 +1,139 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+    node *prev;
+};
+node *tail=NULL;
+void insertAtFirstCDLL(int x){
+    node *n = new node;
+    n->data=x;
+    if(tail==NULL)
+    {
+        n->next=n;
+        n->prev=n;
+        tail=n;
+    }
+    else{
+        n->next=tail->next;
+        n->next->prev=n;
+        n->prev=tail;
+        tail->next=n;
+    }
+   cout<<"node which is inserted at begining : "<<n->data<<endl;  
+}
+
+void showCDLL(){
+    node *temp=tail->next;
+    while(temp->next!=tail->next){ 
+        
+        cout<<temp->data<<" "; 
+        temp=temp->next; 
+        } 
+        
+        cout<<temp->data<<endl;
+}
+
+/* print using prev pointer
+void showCDLL(){
+ 
+    node *temp=tail;
+    while(temp->prev!=tail){ 
+        
+        cout<<temp->data<<" "; 
+        temp=temp->prev; 
+        } 
+        
+        cout<<temp->data<<endl;
+}
+*/
+void insertAtlastCDLL(int x){
+    node *n = new node;
+    n->data=x;
+    n->next=tail->next;
+    n->prev=tail;
+    tail->next->prev=n;
+    tail->next=n;
+    tail=n;
+    
+    cout<<"last node inserted : "<<tail->data<<endl;
+}
+
+void insertAtposCDLL(int x){
+node *temp=tail->next; int i=1,pos;
+node *n = new node;
+n->data=x;
+cout<<"Enter Position where you want to insert new node : ";
+cin>>pos;
+while(i<pos-1){ temp=temp->next; i++; }
+n->next=temp->next;
+n->prev=temp;
+n->next->prev=n;
+temp->next=n;
+
+}
+
+void deleteAtFirstCDLL(){
+    node *temp=tail->next;
+    tail->next=tail->next->next;
+    temp->next->prev=tail;
+    cout<<"first node ("<<temp->data<<") deleted..\n";
+    delete temp;
+}
+
+void deleteAtlastCDLL(){
+    
+    node *t1=tail->prev; node *t2=tail->next; node *t3=tail;
+    tail->next->prev=t1;
+    tail=tail->prev;
+    tail->next=t2;
+    cout<<"first node ("<<t3->data<<") deleted..\n";
+    delete t3;
+}
+
+void deleteAtposCDLL(){
+    node *temp=tail->next;
+    int pos,i=1;
+    cout<<"Enter Position of which you want to delete node...\n";
+    cin>>pos;
+    while(i<pos-1){temp=temp->next; i++; }
+    
+    node *t1=temp->next;
+    temp->next=t1->next;
+    t1->next->prev=temp;
+    cout<<"first node ("<<t1->data<<") deleted..\n";
+
+    delete t1;
+}
+
+int main()
+{
+    insertAtFirstCDLL(10);
+    insertAtFirstCDLL(40);
+    insertAtFirstCDLL(20);
+    
+    insertAtFirstCDLL(30);cout<<endl;
+    showCDLL();
+    
+    insertAtlastCDLL(50);
+    showCDLL();
+    
+    insertAtposCDLL(70);
+    showCDLL();
+    
+    deleteAtFirstCDLL();
+    showCDLL();
+    
+    deleteAtlastCDLL();
+    showCDLL();
+    
+    deleteAtposCDLL();
+    showCDLL();
+
+
+
+
+    return 0;
+}

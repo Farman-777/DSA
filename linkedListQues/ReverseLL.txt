@@ -1,0 +1,66 @@
+
+#include <iostream>
+using namespace std;
+
+struct node{
+    int data;
+    node *next;
+};
+
+ node *head=NULL;
+ node *next,*temp;
+ node *tempNode;
+
+void createLL(node **head,int x){
+    node *n = new node;
+    n->data=x;
+    n->next=(*head);
+    (*head)=n;
+    // cout<<"node inserted\n";
+// tempNode=(*head);
+    
+}
+
+
+void displayLL(node *head)
+{
+    temp=head;
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+        
+    }
+}
+node *reverseLL(node *head_ref)
+{
+    node *curr,*nxt;
+   node *prev=NULL;
+    curr=head_ref;nxt=NULL;
+    while(curr!=NULL)
+    {
+        nxt=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=nxt;
+    }
+    
+    (head_ref)=prev;
+    return (head_ref);
+
+} 
+
+
+
+int main()
+{
+    node *head=NULL;
+    createLL(&head,10);
+    createLL(&head,20);
+    createLL(&head,30);
+    createLL(&head,40);
+    displayLL(head);
+    node *temp=reverseLL(head);cout<<endl;
+    displayLL(temp);
+    return 0;
+}

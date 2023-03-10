@@ -1,0 +1,84 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+struct node {
+    int data;
+    node *next;
+};
+
+node *head=NULL;
+
+void insertAtfirstSLL(int x){
+node *n = new node;
+n->data=x;
+n->next=head;
+head=n;
+cout<<"Node inserted at first : "<<x<<endl;
+
+}
+
+void showSLL(node *head){
+    cout<<"linked list : ";
+    node *temp=head;
+    while(temp!=NULL){ cout<<temp->data<<" "; temp=temp->next; }
+}
+
+
+node *DetectLoop(node *head){
+    node *slow=head;
+    node *fast=head;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast) { return slow; }
+    }
+
+    return NULL;
+
+}
+
+node *DetectFirstCyclePoint(node *head){
+    node *meet=DetectLoop(head);
+    node *start=head;
+    while(start!=meet){
+        start=start->next;
+        meet=meet->next;
+    }
+    return start;
+}
+
+void removeLoop(node *head){
+    if(head==NULL){ return; }
+    node *startofLoop = DetectFirstCyclePoint(head);
+    node *temp=startofLoop;
+    
+    while( temp->next != startofLoop ){ temp=temp->next; }
+    temp->next=NULL;
+}
+
+
+int main()
+{
+   insertAtfirstSLL(10);
+   insertAtfirstSLL(20);
+   insertAtfirstSLL(30);
+   insertAtfirstSLL(40);
+   insertAtfirstSLL(50);cout<<endl;
+   showSLL(head);cout<<"\n";
+ 
+   head->next->next->next->next->next=head->next;
+
+  if(DetectLoop(head)==NULL){ cout<<"Loop Not Exist In LInkedList\n"; }
+  else{ cout<<"Loop Exist In LInkedList\n"; }
+
+  cout<<"Loop Exist At Node : "<<DetectLoop(head)->data<<endl;
+  
+  cout<<"Meeting Point of linked list : "<<*DetectFirstCyclePoint(head)->data;
+   
+  removeLoop(head);
+  cout<<endl;
+  
+  if(DetectLoop(head)==NULL){ cout<<"Loop Not Exist In LInkedList\n"; }
+  else{ cout<<"Loop Exist In LInkedList\n"; }
+  return 0;
+}

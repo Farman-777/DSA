@@ -1,0 +1,118 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+
+struct node {
+    int data;
+    node *next;
+};
+
+node *last=NULL;
+
+void insertAtfirstCLL(int x){
+    node *n = new node;
+    n->data=x;
+    
+    if(last==NULL){ n->next=n; last=n; }
+    else{ n->next=last->next; last->next=n; }
+}
+
+void insertAtlastCLL( int x ) { 
+    node *n = new node;
+    n->data=x; 
+    n->next=last->next; 
+    last->next=n;
+    last=n;
+} 
+
+void showCLL(){
+    cout<<"Circular Linked List is : \n";
+    node *temp=last->next;
+    
+    while(temp->next!=last->next){ 
+    cout<<temp->data<<" ";
+    temp=temp->next;
+    } 
+    cout<<temp->data;cout<<endl; 
+}
+
+void insertAtposCLL(int x){
+    node *n = new node;
+    n->data=x;
+    node *temp=last->next;
+    int pos,i=1;
+    showCLL();
+    cout<<"\nEnter a position you at which you want to insert  node : "<<x<<endl;
+    cin>>pos;
+    while(i<pos-1){ temp=temp->next; i++;}
+  
+    n->next=temp->next;
+    temp->next=n;
+
+}
+
+void deleteAtfirstCLL(){ 
+node *temp=last->next; 
+last->next=temp->next;
+cout<<"After first Element ("<<temp->data<<") is deleted CLL is :\n";
+delete temp;
+}
+
+void deleteAtlastCLL(){
+    node *temp=last->next;
+    while(temp->next!=last){ temp=temp->next; }
+    node *t=last;
+    temp->next=last->next;
+    last=temp;
+    cout<<"After last Element ("<<t->data<<") is deleted CLL is :\n";
+    delete t;
+}
+
+void deleteAtposCLL(){
+    node *temp=last->next; int pos,i=1;
+    cout<<"Enter position which element you want to delete\n";
+    cin>>pos;
+    while(i<pos-1){ temp=temp->next; i++;}
+    node *t2=temp->next;
+    temp->next=t2->next;
+    cout<<"After last Element ("<<temp->data<<") is deleted CLL is :\n";
+    delete t2;
+}
+
+void reverseCLL(){
+    cout<<"\nReverse ";
+    node *prev,*curr,*nextnode;
+    curr=last->next;
+    nextnode=curr->next;
+    
+        while(curr!=last){
+        prev=curr;
+        curr=nextnode;
+        nextnode=curr->next;
+        curr->next=prev;
+        
+    }
+    nextnode->next=last;
+    last=nextnode;
+    
+  
+}
+
+int main()
+{
+    insertAtfirstCLL(10);
+    insertAtfirstCLL(20);
+    insertAtfirstCLL(30);
+    insertAtfirstCLL(40);
+    insertAtfirstCLL(50); showCLL();
+    
+    cout<<endl; insertAtlastCLL(60);showCLL(); 
+    cout<<endl; insertAtposCLL(70);showCLL();
+    cout<<endl; deleteAtfirstCLL();showCLL();
+    cout<<endl; deleteAtlastCLL();showCLL();
+    cout<<endl; deleteAtposCLL();showCLL();
+    cout<<endl; reverseCLL();showCLL();
+    
+
+    return 0;
+}

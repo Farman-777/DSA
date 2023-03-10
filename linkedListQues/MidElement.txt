@@ -1,0 +1,48 @@
+#include <iostream>
+#include<stdlib.h>
+using namespace std;
+struct node {
+    int data;
+    node *next;
+};
+
+node *head=NULL;
+
+void insertAtfirstSLL(int x){
+node *n = new node;
+n->data=x;
+n->next=head;
+head=n;
+cout<<"Node inserted at first : "<<x<<endl;
+
+}
+
+void showSLL(node *head){
+    cout<<"linked list : ";
+    node *temp=head;
+    while(temp!=NULL){ cout<<temp->data<<" "; temp=temp->next; }
+}
+
+
+node *mid(node *head){
+    node *slow=head;
+    node *fast=head;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+   // cout<<"Mid node of linked list is : "<<slow->data;
+    return slow;
+}
+int main()
+{
+   insertAtfirstSLL(10);
+   insertAtfirstSLL(20);
+   insertAtfirstSLL(30);
+   insertAtfirstSLL(20);
+   insertAtfirstSLL(10);cout<<endl;
+   showSLL(head);cout<<"\n";
+   
+  cout<<"\nmid of linked list is : "<<mid(head)->data;cout<<endl<<endl;
+return 0;
+}
